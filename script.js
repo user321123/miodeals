@@ -1,42 +1,56 @@
-let allProducts = [];
-
-// Produkte laden
 async function loadProducts() {
     try {
-        const response = await fetch('products.json');
-        allProducts = await response.json();
-        renderProducts(allProducts); // alle anzeigen
+        // Fake-API laden (später durch Amazon API ersetzen)
+        const response = await fetch("./data/products.json");
+        const products = await response.json();
+
+        renderProducts(products);
     } catch (error) {
         console.error("Fehler beim Laden der Produkte:", error);
     }
 }
 
-// Produkte anzeigen
 function renderProducts(products) {
-    const grid = document.getElementById('product-grid');
-    grid.innerHTML = '';
+    const grid = document.getElementById("product-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
 
-    products.forEach(p => {
-        grid.innerHTML += `
-            <div class="card bg-base-100 shadow-xl hover:scale-105 transition-transform">
-                <figure class="px-4 pt-4 relative">
-                    <span class="absolute top-6 left-6 badge badge-error font-bold text-white">-${p.discount}%</span>
-                    <img src="${p.image}" alt="${p.title}" class="rounded-xl h-48 object-contain w-full" />
-                </figure>
-                <div class="card-body">
-                    <h2 class="card-title text-sm h-12 overflow-hidden">${p.title}</h2>
-                    <div class="flex items-center gap-2">
-                        <span class="text-2xl font-bold text-error">${p.currentPrice.toFixed(2)}€</span>
-                        <span class="text-sm line-through opacity-50">${p.oldPrice.toFixed(2)}€</span>
-                    </div>
-                    <div class="card-actions mt-4">
-                        <a href="${p.url}" target="_blank" class="btn btn-primary w-full text-white">Zum Angebot</a>
-                    </div>
+    products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300";
+
+        card.innerHTML = `
+            <figure>
+                <img src="${product.image}" alt="${product.title}" class="rounded-xl" />
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">${product.title}</h2>
+
+                <p class="text-lg font-bold text-primary">
+                    ${product.price.toFixed(2)} ${product.currency}
+                </p>
+
+                ${product.oldPrice ? `
+                    <p class="line-through text-sm opacity-60">
+                        ${product.oldPrice.toFixed(2)} ${product.currency}
+                    </p>
+                ` : ""}
+
+                <p class="text-sm opacity-80">
+                    ⭐ ${product.rating} (${product.ratingCount} Bewertungen)
+                </p>
+
+                <div class="card-actions justify-end">
+                    <a href="${product.affiliateLink}" target="_blank" class="btn btn-primary">
+                        Zum Angebot
+                    </a>
                 </div>
             </div>
         `;
+
+        grid.appendChild(card);
     });
 }
 
-// Start
+// Seite starten
 loadProducts();
