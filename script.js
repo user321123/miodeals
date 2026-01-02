@@ -1,15 +1,22 @@
+// Kategorie anhand der URL erkennen
+function getCategoryFile() {
+    const path = location.pathname;
+
+    if (path.includes("/gaming/")) return "gaming.json";
+    if (path.includes("/kueche/")) return "kueche.json";
+    if (path.includes("/technik/")) return "technik.json";
+
+    // Hauptseite + /alle/ laden ALLE Produkte
+    return "alle.json";
+}
+
 async function loadProducts() {
     try {
-        // Fake-API laden (später durch Amazon API ersetzen)
-        const basePath = location.pathname.includes("/alle/") ||
-                 location.pathname.includes("/gaming/") ||
-                 location.pathname.includes("/kueche/") ||
-                 location.pathname.includes("/technik/")
-                 ? "../"
-                 : "./";
+        const isSubpage = location.pathname.split("/").length > 2;
+        const basePath = isSubpage ? "../data/" : "./data/";
 
-        const response = await fetch(basePath + "data/products.json");
-
+        const file = getCategoryFile();
+        const response = await fetch(basePath + file);
         const products = await response.json();
 
         renderProducts(products);
@@ -20,7 +27,6 @@ async function loadProducts() {
 
 function renderProducts(products) {
     const grid = document.getElementById("product-grid");
-    if (!grid) return;
     grid.innerHTML = "";
 
     products.forEach(product => {
@@ -38,12 +44,6 @@ function renderProducts(products) {
                     ${product.price.toFixed(2)} ${product.currency}
                 </p>
 
-                ${product.oldPrice ? `
-                    <p class="line-through text-sm opacity-60">
-                        ${product.oldPrice.toFixed(2)} ${product.currency}
-                    </p>
-                ` : ""}
-
                 <p class="text-sm opacity-80">
                     ⭐ ${product.rating} (${product.ratingCount} Bewertungen)
                 </p>
@@ -60,5 +60,4 @@ function renderProducts(products) {
     });
 }
 
-// Seite starten
 loadProducts();
