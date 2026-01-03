@@ -1,5 +1,5 @@
 async function loadProducts() {
-    const response = await fetch("../products.json");
+    const response = await fetch("/dealsgalaxy/products.json");
     const products = await response.json();
     const filtered = products.filter(p => p.category === "gaming");
     renderProducts(filtered);
