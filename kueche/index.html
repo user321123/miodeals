@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Küchen Deals - Best Deals</title>
+    <title>Küche Deals - Best Deals</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-base-200 min-h-screen">
     
+<!-- NAVBAR -->
 <div class="navbar bg-base-100 shadow-lg px-4 md:px-20">
     <div class="flex-1">
         <a href="../index.html" class="text-2xl font-bold text-primary">
             DEAL<span class="text-secondary">HUNTER</span>
         </a>
     </div>
+
+    <!-- SUCHFELD -->
+    <div class="flex-none">
+        <input 
+            id="search-input"
+            type="text" 
+            placeholder="Suche…" 
+            class="input input-bordered input-sm w-40 md:w-60"
+        />
+    </div>
 </div>
 
+<!-- KATEGORIEN -->
 <div class="flex flex-wrap gap-4 mb-10 justify-center mt-6">
     <a href="../alle/" class="btn btn-outline btn-primary">Alle Deals</a>
     <a href="../gaming/" class="btn btn-outline btn-primary">Gaming</a>
@@ -24,15 +36,30 @@
     <a href="../technik/" class="btn btn-outline btn-primary">Technik</a>
 </div>
 
+<main class="container mx-auto p-6">
 
-    <main class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold mb-6 text-center">Küchen Deals</h1>
+    <!-- TITEL + SORTIERUNG -->
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold">Küche Deals</h1>
 
-        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
-    </main>
+        <select id="sort-select" class="select select-bordered select-sm">
+            <option value="empfohlen">Empfohlen</option>
+            <option value="price-asc">Preis: Aufsteigend</option>
+            <option value="price-desc">Preis: Absteigend</option>
+            <option value="discount-desc">Prozente: Höchster Rabatt</option>
+            <option value="rating-desc">Durchschnitt Bewertung</option>
+        </select>
+    </div>
 
-    <script src="script.js?v=6"></script>
+    <!-- PRODUKTGRID -->
+    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+    <!-- PAGINATION -->
+    <div id="pagination" class="flex justify-center items-center gap-2 pt-10"></div>
+
+</main>
+
+<script src="script.js?v=7"></script>
 
 </body>
 </html>
-
