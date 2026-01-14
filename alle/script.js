@@ -1,4 +1,4 @@
-console.log("🔥 script.js v10 ist aktiv!");
+console.log("🔥 script.js v11 ist aktiv!");
 
 let allProducts = [];
 let filteredProducts = [];
@@ -162,12 +162,17 @@ function renderPagination() {
 
         if (disabled) btn.classList.add("btn-disabled");
         else
-            btn.addEventListener("click", () => {
-                currentPage = page;
-                renderCurrentPage();
-                renderPagination();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            });
+            
+    btn.addEventListener("click", () => {
+    currentPage = page;
+    renderCurrentPage();
+    renderPagination();
+
+    setTimeout(() => {
+        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+        document.body.scrollTo({ top: 0, behavior: "smooth" });
+    }, 10);
+});
 
         return btn;
     };
