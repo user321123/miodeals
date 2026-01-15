@@ -1,121 +1,94 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="de" data-theme="miotheme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MioDeals – Deine Deal-Plattform</title>
-
+    <title>MioDeals – Top Angebote</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             daisyui: {
                 themes: [{
                     miotheme: {
-                        "primary": "#1E90FF",      /* MioDeals Blau */
-                        "secondary": "#FF4500",    /* Rabatt-Orange */
-                        "accent": "#4FC3F7",
+                        "primary": "#1E293B",      /* Dunkles Blau/Grau für Text-Logo & Buttons */
+                        "secondary": "#FB923C",    /* Orange für Rabatte */
+                        "accent": "#38BDF8",
                         "neutral": "#1F2937",
-                        "base-100": "#ffffff",    /* Karten-Hintergrund */
-                        "base-200": "#f3f4f6",    /* Seiten-Hintergrund */
+                        "base-100": "#ffffff",
+                        "base-200": "#F1F5F9",    /* Heller Hintergrund wie im Bild */
                     },
                 }],
             },
         }
     </script>
-
     <style>
-        /* Verhindert Textumbruch-Chaos bei langen Titeln */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        /* Sanftes Einblenden der Bilder */
-        .product-img {
-            transition: transform 0.5s ease;
-        }
-        .card:hover .product-img {
-            transform: scale(1.08);
-        }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-5px); shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
     </style>
 </head>
+<body class="bg-base-200 min-h-screen flex flex-col font-sans">
 
-<body class="bg-base-200 min-h-screen flex flex-col">
-
-<header class="bg-base-100 shadow-sm sticky top-0 z-50">
-    <div class="navbar container mx-auto px-4 py-3 flex flex-col lg:flex-row gap-4">
-        
-        <div class="flex-1 justify-center lg:justify-start">
-            <a href="../index.html" class="transition-opacity hover:opacity-80">
-                <img src="../images/miodeals-logo.png" alt="MioDeals Logo" class="h-10 md:h-12 object-contain" />
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="navbar container mx-auto px-4 py-4 flex flex-col lg:flex-row gap-4">
+        <div class="flex-1">
+            <a href="../index.html" class="text-3xl font-black tracking-tighter text-slate-800">
+                Mio<span class="text-primary">Deals</span>
             </a>
         </div>
 
-        <div class="flex-none w-full lg:w-1/2 max-w-2xl px-2">
-            <div class="relative w-full">
-                <input id="search-input" type="text" placeholder="Was suchst du? (z.B. iPhone, Gaming...)" 
-                       class="input input-bordered w-full rounded-full bg-base-200 focus:bg-white focus:border-primary transition-all pr-12 h-11" />
-                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+        <div class="flex-none w-full lg:w-1/2 max-w-xl">
+            <div class="relative">
+                <input id="search-input" type="text" placeholder="Angebote durchsuchen..." 
+                       class="input input-bordered w-full rounded-md bg-slate-50 focus:bg-white pr-12 h-12 border-slate-200" />
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
             </div>
         </div>
 
-        <div class="flex-1 hidden lg:flex justify-end">
-             <div class="badge badge-outline badge-primary text-xs font-bold uppercase tracking-tighter">Beste Deals 2025</div>
+        <div class="flex-1 hidden lg:flex justify-end gap-4 text-sm font-medium text-slate-500">
+            <span>Support</span>
+            <span>Partner</span>
         </div>
     </div>
 
-    <nav class="bg-white border-t border-b overflow-x-auto no-scrollbar">
-        <div class="container mx-auto flex justify-center gap-2 md:gap-6 py-2 px-4 whitespace-nowrap">
-            <a href="../alle/" class="btn btn-ghost btn-sm rounded-full text-primary font-bold">Alle Deals</a>
-            <a href="../gaming/" class="btn btn-ghost btn-sm rounded-full">Gaming</a>
-            <a href="../kueche/" class="btn btn-ghost btn-sm rounded-full">Küche</a>
-            <a href="../technik/" class="btn btn-ghost btn-sm rounded-full">Technik</a>
+    <nav class="bg-slate-50 border-t border-b overflow-x-auto">
+        <div class="container mx-auto flex justify-center gap-2 py-3 px-4">
+            <a href="../alle/" class="btn btn-primary btn-sm rounded shadow-sm px-6">Alle Deals</a>
+            <a href="../gaming/" class="btn btn-ghost btn-sm rounded px-6 text-slate-600">Gaming</a>
+            <a href="../kueche/" class="btn btn-ghost btn-sm rounded px-6 text-slate-600">Küche</a>
+            <a href="../technik/" class="btn btn-ghost btn-sm rounded px-6 text-slate-600">Technik</a>
         </div>
     </nav>
 </header>
 
-<main class="container mx-auto px-4 py-8 flex-grow">
-    
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-        <div>
-            <h1 class="text-3xl font-black text-neutral uppercase tracking-tight">Alle Angebote</h1>
-            <p class="text-gray-500 font-medium">Aktuell vergleichen wir <span id="deal-count" class="text-primary">...</span> Deals für dich.</p>
+<main class="container mx-auto px-2 md:px-4 py-10 flex-grow">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4 px-2">
+        <div class="flex gap-2">
+             <button class="btn btn-sm btn-square bg-slate-800 text-white border-none">#</button>
+             <h1 class="text-2xl font-bold text-slate-800">Top Angebote</h1>
         </div>
         
-        <div class="flex items-center gap-3">
-            <span class="text-xs font-bold text-gray-400 uppercase">Sortieren nach:</span>
-            <select id="sort-select" class="select select-bordered select-sm rounded-lg bg-white border-gray-300 focus:border-primary">
-                <option value="empfohlen">🔥 Empfohlen</option>
-                <option value="price-asc">💰 Preis: Niedrigster zuerst</option>
-                <option value="price-desc">💰 Preis: Höchster zuerst</option>
-                <option value="discount-desc">📉 Höchster Rabatt %</option>
-            </select>
-        </div>
+        <select id="sort-select" class="select select-bordered select-sm rounded bg-white border-slate-200 w-full md:w-auto">
+            <option value="empfohlen">Sortieren: Empfohlen</option>
+            <option value="price-asc">Preis: Aufsteigend</option>
+            <option value="price-desc">Preis: Absteigend</option>
+            <option value="discount-desc">Rabatt: Höchster %</option>
+        </select>
     </div>
 
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div id="product-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8">
         </div>
 
-    <div id="pagination" class="flex justify-center items-center gap-2 py-16">
-        </div>
-
+    <div id="pagination" class="flex justify-center items-center gap-2 py-16"></div>
 </main>
 
-<footer class="bg-white border-t py-10 mt-auto">
+<footer class="bg-white border-t py-12 mt-auto">
     <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex flex-col items-center md:items-start">
-             <img src="../images/miodeals-logo.png" alt="MioDeals Logo" class="h-8 mb-4 opacity-50 grayscale hover:grayscale-0 transition-all" />
-             <p class="text-sm text-gray-400">© 2025 MioDeals – Alle Rechte vorbehalten</p>
-        </div>
-        
-        <div class="flex gap-10 text-sm font-semibold text-gray-600">
+        <p class="text-sm text-slate-400 font-medium">© 2025 MioDeals – Alle Rechte vorbehalten</p>
+        <div class="flex gap-10 text-sm font-bold text-slate-600">
             <a href="../impressum.html" class="hover:text-primary transition-colors">Impressum</a>
             <a href="../datenschutz.html" class="hover:text-primary transition-colors">Datenschutz</a>
         </div>
@@ -123,6 +96,5 @@
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
