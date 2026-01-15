@@ -10,7 +10,10 @@ async function loadProducts() {
         applyAllAndRender();
         setupEventListeners();
     } catch (error) {
-        document.getElementById("product-grid").innerHTML = `<div class="col-span-full text-center py-20">Ladefehler...</div>`;
+        document.getElementById("product-grid").innerHTML = `
+            <div class="col-span-full text-center py-20 opacity-50 font-bold">
+                Angebote konnten nicht geladen werden.
+            </div>`;
     }
 }
 
@@ -48,22 +51,41 @@ function renderGrid() {
 
     grid.innerHTML = items.map(p => {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
+        
         return `
-        <article class="product-card bg-white rounded-lg overflow-hidden flex flex-col h-full shadow-sm border border-slate-100">
-            <div class="relative bg-slate-100 flex justify-center items-center h-40 md:h-60 p-4">
-                ${disc > 0 ? `<div class="absolute top-2 left-2 bg-orange-500 text-white font-bold text-[10px] md:text-xs px-2 py-1 rounded">-${disc}%</div>` : ''}
-                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain" loading="lazy" />
+        <article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
+            
+            <div class="relative bg-slate-100 flex justify-center items-center h-44 md:h-64 p-6">
+                ${disc > 0 ? `
+                    <div class="absolute top-4 left-4 bg-[#FB923C] text-white font-black text-[10px] md:text-xs px-2.5 py-1.5 rounded shadow-sm z-10">
+                        -${disc}%
+                    </div>` : ''}
+                <img src="${p.image}" alt="${p.title}" class="h-full w-full object-contain mix-blend-multiply" loading="lazy" />
             </div>
-            <div class="p-3 md:p-6 flex flex-col flex-grow bg-white">
-                <h3 class="font-bold text-slate-800 text-[11px] md:text-base line-clamp-2 leading-tight mb-2 h-8 md:h-12">${p.title}</h3>
-                <div class="mb-4">
-                    <div class="text-lg md:text-2xl font-black text-orange-600">${p.currentPrice.toFixed(2)}€</div>
-                    ${p.oldPrice ? `<div class="text-[9px] md:text-xs text-slate-400 line-through">UVP: ${p.oldPrice.toFixed(2)}€</div>` : ''}
+
+            <div class="p-5 md:p-6 flex flex-col flex-grow bg-white">
+                <span class="text-[9px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">
+                    ${p.category || 'EXKLUSIV'}
+                </span>
+                <h3 class="font-bold text-slate-800 text-sm md:text-base line-clamp-2 leading-tight mb-4 h-10 md:h-12">
+                    ${p.title}
+                </h3>
+                
+                <div class="mt-auto pb-4">
+                    <div class="text-2xl md:text-4xl font-[900] text-[#FB923C] tracking-tighter leading-none">
+                        ${p.currentPrice.toFixed(2).replace('.', ',')}€
+                    </div>
+                    ${p.oldPrice ? `
+                        <div class="text-[10px] md:text-xs text-slate-400 font-medium mt-1">
+                            Statt <span class="line-through">${p.oldPrice.toFixed(2).replace('.', ',')}€</span>
+                        </div>` : ''}
                 </div>
-                <a href="${p.url}" target="_blank" class="btn bg-slate-800 hover:bg-slate-700 text-white btn-block btn-xs md:btn-md rounded font-bold border-none mt-auto">
-                    Zum Angebot
-                </a>
             </div>
+
+            <a href="${p.url}" target="_blank" class="bg-[#1E293B] hover:bg-slate-700 text-white text-center py-4 font-bold text-sm uppercase tracking-widest transition-colors w-full border-none rounded-none block">
+                Zum Angebot
+            </a>
+
         </article>
         `;
     }).join('');
@@ -76,11 +98,16 @@ function renderPagination() {
     
     let html = '';
     for(let i=1; i<=total; i++) {
-        html += `<button onclick="changePage(${i})" class="btn btn-xs md:btn-sm ${i===currentPage ? 'btn-primary' : 'btn-ghost text-slate-400 font-bold'} rounded">${i}</button>`;
+        html += `<button onclick="changePage(${i})" class="btn btn-sm ${i===currentPage ? 'btn-primary text-white' : 'btn-ghost text-slate-400'} rounded-md mx-0.5">${i}</button>`;
     }
     container.innerHTML = html;
 }
 
-window.changePage = (p) => { currentPage = p; window.scrollTo({top: 0, behavior: 'smooth'}); renderGrid(); renderPagination(); };
+window.changePage = (p) => { 
+    currentPage = p; 
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
+    renderGrid(); 
+    renderPagination(); 
+};
 
 loadProducts();
