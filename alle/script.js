@@ -98,12 +98,7 @@ function renderPagination() {
     
     let html = '';
     for(let i=1; i<=total; i++) {
-
-        html += `
-        <button onclick="changePage(${i})"
-            class="btn btn-sm rounded-md mx-0.5 ${i === currentPage ? 'btn-primary text-white' : 'btn-ghost text-slate-400'}">
-            ${i}
-        </button>`;
+        html += `<button onclick="changePage(${i})" class="btn btn-sm ${i===currentPage ? 'btn-primary text-white' : 'btn-ghost text-slate-400'} rounded-md mx-0.5">${i}</button>`;
     }
     container.innerHTML = html;
 }
