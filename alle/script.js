@@ -5,7 +5,7 @@ const pageSize = 12;
 
 async function loadProducts() {
     try {
-        const response = await fetch("/dealsgalaxy/product.json");
+        const response = await fetch("../product.json");
         allProducts = await response.json();
         applyAllAndRender();
         setupEventListeners();
