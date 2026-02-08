@@ -29,6 +29,26 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
+
+        /* -----------------------------------------
+           DIAGONALES WASSERZEICHEN "MioDeals"
+        ----------------------------------------- */
+        body::before {
+            content: "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals   MioDeals";
+            position: fixed;
+            top: -200px;
+            left: -200px;
+            width: 300%;
+            height: 300%;
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.03);
+            transform: rotate(-30deg);
+            pointer-events: none;
+            z-index: -1;
+            white-space: nowrap;
+            user-select: none;
+        }
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -86,7 +106,6 @@
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
         <div class="mx-auto flex justify-start gap-2 py-3 px-4 pl-4 w-full">
 
-            <!-- ALLE DEALS – jetzt mit bg-mio-dark -->
             <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase bg-mio-dark">
                 Alle Deals
@@ -116,7 +135,6 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 px-2">
         <div class="flex items-center gap-2">
 
-            <!-- # Icon – jetzt bg-mio-dark -->
             <div class="w-8 h-8 bg-mio-dark rounded flex items-center justify-center text-white font-bold text-xs">#</div>
 
             <h1 class="text-2xl font-bold text-slate-800 tracking-tight uppercase">Angebote</h1>
@@ -142,7 +160,6 @@
 
         <p class="text-sm text-slate-400 font-medium">© 2025 MioDeals – Alle Rechte vorbehalten</p>
 
-        <!-- Impressum & Datenschutz – jetzt text-mio-dark -->
         <div class="flex gap-10 text-sm font-bold text-mio-dark">
             <a href="../impressum.html" class="hover:text-mio-dark transition">Impressum</a>
             <a href="../datenschutz.html" class="hover:text-mio-dark transition">Datenschutz</a>
