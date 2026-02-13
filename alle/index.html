@@ -31,11 +31,20 @@
         }
 
         /* -----------------------------------------
-           VOLLFLÄCHIGES TEXT-WASSERZEICHEN
-           (ECHTER TEXT, ZEILE FÜR ZEILE)
+           WASSERZEICHEN HINTER DEN KARTEN (MAIN)
         ----------------------------------------- */
-        body::before {
+        main {
+            position: relative;
+            z-index: 1; /* Inhalt bleibt oben */
+        }
+
+        main::before {
             content:
+                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
+                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
+                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
+                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
+                "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
                 "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
                 "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
                 "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A"
@@ -53,20 +62,22 @@
                 "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals \A";
 
             white-space: pre;
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100%;
+
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
 
-            font-size: 1.1rem;
+            font-size: 1.4rem;          /* Sichtbarer */
             font-weight: 900;
-            line-height: 42px;
-            color: rgba(0, 0, 0, 0.035);
+            line-height: 48px;          /* Zeilenabstand */
+            color: rgba(0, 0, 0, 0.06);  /* Deutlich sichtbar, aber dezent */
 
-            display: block;
+            opacity: 0.25;              /* Professioneller Look */
         }
     </style>
 
