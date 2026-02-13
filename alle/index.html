@@ -31,14 +31,8 @@
         }
 
         /* -----------------------------------------
-           FUNKTIONIERENDES DIAGONALES WASSERZEICHEN
+           DIAGONALES WASSERZEICHEN "MioDeals"
         ----------------------------------------- */
-
-        body {
-            position: relative;
-            background: var(--mio-light);
-        }
-
         body::before {
             content: "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals   MioDeals";
             position: fixed;
@@ -51,14 +45,9 @@
             color: rgba(0, 0, 0, 0.03);
             transform: rotate(-30deg);
             pointer-events: none;
+            z-index: -1;
             white-space: nowrap;
             user-select: none;
-            z-index: 0;
-        }
-
-        body > * {
-            position: relative;
-            z-index: 1;
         }
     </style>
 
@@ -83,7 +72,7 @@
     </script>
 </head>
 
-<body class="min-h-screen flex flex-col font-sans">
+<body class="bg-mio-light min-h-screen flex flex-col font-sans">
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
 
@@ -92,8 +81,8 @@
                 lg:grid lg:grid-cols-[1fr_2fr_1fr] lg:items-center">
 
         <div class="flex justify-center lg:justify-start">
-            <a href="#" class="flex items-center">
-                <img src="https://via.placeholder.com/150x50?text=MioDeals" alt="MioDeals Logo" class="h-12 lg:h-14 w-auto select-none">
+            <a href="../index.html" class="flex items-center">
+                <img src="../assets/Logo-MIODEALS-v2.png" alt="MioDeals Logo" class="h-12 lg:h-14 w-auto select-none">
             </a>
         </div>
 
@@ -117,22 +106,22 @@
     <nav class="bg-white border-t border-b overflow-x-auto whitespace-nowrap">
         <div class="mx-auto flex justify-start gap-2 py-3 px-4 pl-4 w-full">
 
-            <a href="#"
+            <a href="../alle/"
                class="px-6 py-2 rounded text-white font-bold text-[10px] tracking-widest uppercase bg-mio-dark">
                 Alle Deals
             </a>
 
-            <a href="#"
+            <a href="../gaming/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Gaming
             </a>
 
-            <a href="#"
+            <a href="../kueche/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Küche
             </a>
 
-            <a href="#"
+            <a href="../technik/"
                class="px-6 py-2 rounded text-slate-500 font-bold text-[10px] tracking-widest uppercase hover:text-mio-secondary transition">
                 Technik
             </a>
@@ -172,20 +161,13 @@
         <p class="text-sm text-slate-400 font-medium">© 2025 MioDeals – Alle Rechte vorbehalten</p>
 
         <div class="flex gap-10 text-sm font-bold text-mio-dark">
-            <a href="#" class="hover:text-mio-dark transition">Impressum</a>
-            <a href="#" class="hover:text-mio-dark transition">Datenschutz</a>
+            <a href="../impressum.html" class="hover:text-mio-dark transition">Impressum</a>
+            <a href="../datenschutz.html" class="hover:text-mio-dark transition">Datenschutz</a>
         </div>
 
     </div>
 </footer>
 
-<script>
-    document.getElementById("product-grid").innerHTML = `
-        <div class="col-span-full text-center text-slate-500 font-bold text-lg">
-            Test erfolgreich – Wasserzeichen sichtbar!
-        </div>
-    `;
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
