@@ -31,23 +31,33 @@
         }
 
         /* -----------------------------------------
-           DIAGONALES WASSERZEICHEN "MioDeals"
+           HORIZONTALES WASSERZEICHEN "MioDeals"
         ----------------------------------------- */
         body::before {
-            content: "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals   MioDeals";
+            content: "MioDeals   MioDeals   MioDeals   MioDeals   MioDeals";
             position: fixed;
-            top: -200px;
-            left: -200px;
-            width: 300%;
-            height: 300%;
-            font-size: 5rem;
+            top: 120px; /* Startpunkt unter dem Header */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 120px);
+
+            font-size: 1.6rem; /* kleinere Schrift */
             font-weight: 900;
-            color: rgba(0, 0, 0, 0.03);
-            transform: rotate(-30deg);
+            color: rgba(0, 0, 0, 0.04);
+
+            white-space: nowrap;
+            line-height: 60px; /* Abstand zwischen den Zeilen */
+
             pointer-events: none;
             z-index: -1;
-            white-space: nowrap;
-            user-select: none;
+
+            background-repeat: repeat-y;
+            background-size: 100% 60px;
+            background-image: linear-gradient(
+                to bottom,
+                currentColor 0,
+                currentColor 0
+            );
         }
     </style>
 
