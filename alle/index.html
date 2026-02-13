@@ -30,24 +30,25 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        /* -----------------------------------------
-           PROFESSIONELLES SVG-WASSERZEICHEN
-           Wiederholt sich automatisch über Main
-        ----------------------------------------- */
-        main {
-            position: relative;
-            z-index: 1;
+/* -----------------------------------------
+   PROFESSIONELLES SVG-WASSERZEICHEN (VERBESSERT)
+----------------------------------------- */
+main {
+    position: relative;
+    z-index: 1;
 
-            /* SVG als wiederholbares Pattern */
-            background-image: url("data:image/svg+xml;utf8,\
-                <svg xmlns='http://www.w3.org/2000/svg' width='900' height='60'>\
-                    <text x='0' y='40' font-size='28' font-weight='900' fill='rgba(0,0,0,0.05)'>\
-                        MioDeals MioDeals MioDeals MioDeals MioDeals\
-                    </text>\
-                </svg>");
-            background-repeat: repeat;
-            background-size: 900px 60px; /* Breite der Zeile + Zeilenhöhe */
-        }
+    /* Neues, optimiertes SVG */
+    background-image: url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='70'>\
+            <text x='0' y='50' font-size='32' font-weight='900' fill='rgba(0,0,0,0.035)'>\
+                MioDeals MioDeals MioDeals MioDeals MioDeals MioDeals MioDeals\
+            </text>\
+        </svg>");
+    
+    background-repeat: repeat;
+    background-size: 1200px 70px; /* Breite der Zeile + Zeilenhöhe */
+}
+
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
