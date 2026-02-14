@@ -122,7 +122,7 @@ function renderGrid() {
     </div>
 
     <a href="${p.url}" target="_blank"
-       class="bg-mio-dark hover:bg-slate-700 text-white text-center py-3 md:py-4 font-bold text-xs md:text-sm uppercase tracking-widest block">
+       class="bg-mio-dark hover:bg-mio-secondary text-white text-center py-3 md:py-4 font-bold text-xs md:text-sm uppercase tracking-widest block">
        Zum Angebot
     </a>
 
