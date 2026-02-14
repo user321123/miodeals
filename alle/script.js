@@ -96,7 +96,7 @@ function renderGrid() {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
 
         return `
-<article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
+<article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full lg:scale-90 lg:origin-top">
 
     <div class="relative bg-slate-100 flex justify-center items-center h-32 md:h-64 p-4">
         ${disc > 0 ? `<div class="absolute top-3 left-3 px-2 py-1 bg-[var(--mio-secondary)] text-white font-black text-[9px] md:text-xs rounded z-10">-${disc}%</div>` : ''}
