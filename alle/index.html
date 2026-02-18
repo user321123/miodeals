@@ -22,38 +22,17 @@
         }
 
         .product-card {
-            transition: all 0.3s ease;
+            transition: transform .25s ease, box-shadow .25s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -5px rgba(0,0,0,0.12);
         }
 
-        /* -----------------------------------------
-           NEUES, LÜCKENLOSES WASSERZEICHEN
-        ----------------------------------------- */
-        /* main {
-            position: relative;
-            z-index: 1;
+        .product-card:hover .cta-btn {
+            background: var(--mio-secondary) !important;
         }
-
-        main::before {
-            content: "MioDeals MioDeals MioDeals MioDeals MioDeals MioDeals MioDeals MioDeals";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 60px;
-
-            font-size: 32px;
-            font-weight: 900;
-            color: rgba(0,0,0,0.035);
-            white-space: nowrap;
-
-            pointer-events: none;
-            user-select: none;
-        } */
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
