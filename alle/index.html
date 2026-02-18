@@ -30,8 +30,11 @@
             box-shadow: 0 12px 25px -5px rgba(0,0,0,0.12);
         }
 
-        .product-card:hover .cta-btn {
-            background: var(--mio-secondary) !important;
+        /* Hover-Effekt nur auf Desktop */
+        @media (hover: hover) and (pointer: fine) {
+            .product-card:hover .cta-btn {
+                background: var(--mio-secondary) !important;
+            }
         }
     </style>
 
