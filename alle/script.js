@@ -7,8 +7,6 @@ async function loadProducts() {
     try {
         const response = await fetch("../product.json");
         allProducts = await response.json();
-        applyAllAndRender();
-        setupEventListeners();
     } catch (error) {
         console.warn("Lade lokale Testdaten...");
         allProducts = Array.from({ length: 40 }, (_, i) => ({
@@ -19,9 +17,10 @@ async function loadProducts() {
             category: "DEAL",
             url: "#"
         }));
-        applyAllAndRender();
-        setupEventListeners();
     }
+
+    applyAllAndRender();
+    setupEventListeners();
 }
 
 function setupEventListeners() {
@@ -41,13 +40,10 @@ function setupEventListeners() {
     });
 }
 
-/* -------------------------------------------
-   SUCHFELD: Lupe → X + Clear-Funktion
-------------------------------------------- */
 const searchInput = document.getElementById("search-input");
 const searchIcon = document.getElementById("search-icon");
 
-searchInput.addEventListener("input", () => {
+function updateSearchIcon() {
     if (searchInput.value.trim().length > 0) {
         searchIcon.textContent = "✕";
         searchIcon.classList.add("text-slate-500");
@@ -55,7 +51,9 @@ searchInput.addEventListener("input", () => {
         searchIcon.textContent = "⌕";
         searchIcon.classList.remove("text-slate-500");
     }
-});
+}
+
+searchInput.addEventListener("input", updateSearchIcon);
 
 searchIcon.addEventListener("click", () => {
     if (searchInput.value.trim().length > 0) {
@@ -66,7 +64,6 @@ searchIcon.addEventListener("click", () => {
         searchInput.focus();
     }
 });
-/* ------------------------------------------- */
 
 function applyAllAndRender() {
     const search = document.getElementById("search-input").value.toLowerCase();
@@ -85,6 +82,7 @@ function applyAllAndRender() {
 
     renderGrid();
     renderPagination();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderGrid() {
@@ -96,7 +94,7 @@ function renderGrid() {
         const disc = p.discount || (p.oldPrice ? Math.round(100-(p.currentPrice/p.oldPrice*100)) : 0);
 
         return `
-<article class="product-card flex flex-col bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full lg:scale-90 lg:origin-top">
+<a href="${p.url}" target="_blank" class="product-card block bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 h-full">
 
     <div class="relative bg-slate-100 flex justify-center items-center h-32 md:h-64 p-4">
         ${disc > 0 ? `<div class="absolute top-3 left-3 px-2 py-1 bg-[var(--mio-secondary)] text-white font-black text-[9px] md:text-xs rounded z-10">-${disc}%</div>` : ''}
@@ -121,12 +119,11 @@ function renderGrid() {
         </div>
     </div>
 
-    <a href="${p.url}" target="_blank"
-       class="bg-mio-dark hover:bg-mio-secondary text-white text-center py-3 md:py-4 font-bold text-xs md:text-sm uppercase tracking-widest block">
+    <div class="cta-btn bg-mio-dark text-white text-center py-3 md:py-4 font-bold text-xs md:text-sm uppercase tracking-widest">
        Zum Angebot
-    </a>
+    </div>
 
-</article>`;
+</a>`;
     }).join('');
 }
 
