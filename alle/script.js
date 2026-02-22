@@ -156,3 +156,27 @@ window.changePage = (p) => {
 };
 
 loadProducts();
+
+
+// ---------------------------------------------------------
+// 📱 SMARTPHONE: Button kurz orange → danach Link öffnen
+// ---------------------------------------------------------
+document.addEventListener("click", function (e) {
+    const card = e.target.closest(".product-card");
+    if (!card) return;
+
+    // Nur auf Smartphones (Touch-Geräte)
+    if (!window.matchMedia("(hover: none)").matches) return;
+
+    e.preventDefault();
+
+    const btn = card.querySelector(".cta-btn");
+    const url = card.getAttribute("href");
+
+    btn.classList.add("flash");
+
+    setTimeout(() => {
+        btn.classList.remove("flash");
+        window.location.href = url;
+    }, 150);
+});
