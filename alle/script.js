@@ -161,7 +161,7 @@ loadProducts();
 // ---------------------------------------------------------
 // 📱 SMARTPHONE: Button kurz orange → danach Link öffnen
 // ---------------------------------------------------------
-document.addEventListener("click", function (e) {
+document.addEventListener("touchstart", function (e) {
     const card = e.target.closest(".product-card");
     if (!card) return;
 
@@ -179,4 +179,4 @@ document.addEventListener("click", function (e) {
         btn.classList.remove("flash");
         window.location.href = url;
     }, 150);
-});
+}, { passive: false });
